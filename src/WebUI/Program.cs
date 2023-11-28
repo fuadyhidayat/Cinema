@@ -1,21 +1,13 @@
+using Logic;
 using Logic.Services.DataAccess;
-using Microsoft.EntityFrameworkCore;
 using WebUI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-
-var connectionString = builder.Configuration["DataAccess:ConnectionString"];
-
-builder.Services.AddDbContext<DataAccessService>(options =>
-{
-    _ = options.UseSqlServer(connectionString, builder =>
-    {
-        _ = builder.MigrationsAssembly(typeof(DataAccessService).Assembly.FullName);
-    });
-});
+builder.Services.AddDataAccess(builder.Configuration);
+builder.Services.AddLogic();
 
 var app = builder.Build();
 

@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-using Logic.Movies.Constants;
-using Microsoft.EntityFrameworkCore;
+﻿using Logic.Movies.Constants;
 
 namespace Logic.Services.DataAccess;
 
