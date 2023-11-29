@@ -1,3 +1,4 @@
+using Logic.Common.Exceptions;
 using Logic.Movies.AddMovie;
 using MudBlazor;
 
@@ -34,29 +35,46 @@ public partial class Add
 
     public async Task Submit()
     {
-        _isLoading = true;
-
-        var input = new AddMovieInput()
+        try
         {
-            Title = _model.Title,
-            Synopsis = _model.Synopsis,
-            ReleaseDate = _model.ReleaseDate!.Value,
-            Rating = _model.Rating,
-            TicketPrice = _model.TicketPrice
-        };
+            _isLoading = true;
 
-        var output = await _sender.Send(input);
+            var input = new AddMovieInput()
+            {
+                Title = _model.Title,
+                Synopsis = _model.Synopsis,
+                ReleaseDate = _model.ReleaseDate!.Value,
+                Rating = _model.Rating,
+                TicketPrice = _model.TicketPrice
+            };
 
-        if (output is null)
-        {
-            _ = _snackbar.Add($"Failed to add movie {_model.Title}.", Severity.Error);
+            var output = await _sender.Send(input);
 
-            return;
+            if (output is null)
+            {
+                _ = _snackbar.Add($"Failed to add movie {_model.Title}.", Severity.Error);
+
+                return;
+            }
+
+            _ = _snackbar.Add($"Movie {_model.Title} has been successfully added.", Severity.Success);
+            _navigationManager.NavigateTo($"Movies/Details/{output.Id}");
         }
-
-        _isLoading = false;
-        _ = _snackbar.Add($"Movie {_model.Title} has been successfully added.", Severity.Success);
-        _navigationManager.NavigateTo($"Movies/Details/{output.Id}");
+        catch (AppValidationException ave)
+        {
+            foreach (var erroMessage in ave.ErrorMessages)
+            {
+                _snackbar.Add(erroMessage, Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackbar.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
     }
 }
 
