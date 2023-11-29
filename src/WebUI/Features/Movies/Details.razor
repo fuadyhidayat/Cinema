@@ -6,7 +6,7 @@
     <PageHeader Title="@_movie.Title" BreadcrumbItems="_breadcrumbItems" />
     <MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
         <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Edit" Href="@($"Movies/Edit/{_movie.Id}")">Edit</MudButton>
-        <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Delete</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever" OnClick="ShowDialogRemoveMovie">Delete</MudButton>
     </MudStack>
     <MudPaper Class="pa-4">
         <MudGrid>

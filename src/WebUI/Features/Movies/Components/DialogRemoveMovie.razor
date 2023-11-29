@@ -1,0 +1,17 @@
+﻿@using Logic.Movies.RemoveMovie
+
+<MudDialog>
+    <DialogContent>
+        @if (_isLoading)
+        {
+            <MudProgressLinear Color="Color.Primary" Striped="true" Size="Size.Large" Indeterminate="true" Class="my-4" />
+        }
+        <MudText Typo="Typo.body1">
+            Are you sure you want to remove movie @MovieTitle?
+        </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.Cancel" OnClick="Cancel">Cancel</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Save" OnClick="Confirm">Confirm</MudButton>
+    </DialogActions>
+</MudDialog>
