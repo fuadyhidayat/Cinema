@@ -1,11 +1,9 @@
 using Logic;
-using WebUI.Data;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddLogic(builder.Configuration);
 builder.Services.AddMudServices();
 
