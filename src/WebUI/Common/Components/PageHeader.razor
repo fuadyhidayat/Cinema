@@ -1,1 +1,27 @@
-﻿<h1>@Title</h1>
+﻿@if (string.IsNullOrWhiteSpace(BrowserTabTitle))
+{
+    if (string.IsNullOrWhiteSpace(Title))
+    {
+        <PageTitle>Cinema</PageTitle>
+    }
+    else
+    {
+        <PageTitle>@Title | Cinema</PageTitle>
+    }
+}
+else
+{
+    <PageTitle>@BrowserTabTitle | Cinema</PageTitle>
+}
+
+@if (BreadcrumbItems.Any())
+{
+    <div class="mb-4 px-3 grey lighten-5 rounded">
+        <MudBreadcrumbs Items="BreadcrumbItems"></MudBreadcrumbs>
+    </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(Title))
+{
+    <MudText Typo="Typo.h4" Class="mb-4">@Title</MudText>
+}

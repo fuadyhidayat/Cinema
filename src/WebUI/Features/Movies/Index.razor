@@ -1,0 +1,42 @@
+﻿@page "/Movies"
+
+@using Logic.Movies.GetMovies
+
+<PageHeader Title="Movies" BreadcrumbItems="_breadcrumbItems" />
+
+<MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Href="Movies/Add">Add Movie</MudButton>
+</MudStack>
+<MudTable Elevation="0" Hover="true" Outlined="true" Bordered="true" Striped="true"
+          Loading="_isLoading"
+          Items="_movies" Filter="new Func<MovieDto,bool>(FilterMovies)">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchKeyword" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.ReleaseDate)">Release Date</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.Rating)">Rating</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.TicketPrice)">Ticket Price</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <MudLink Href="@($"Movies/Details/{context.Id}")">
+                <MudHighlighter Text="@context.Title" HighlightedText="@_searchKeyword" />
+            </MudLink>
+        </MudTd>
+        <MudTd DataLabel="Release Date">
+            <MudHighlighter Text="@context.ReleaseDate.ToString("dd MMM yyyy")" HighlightedText="@_searchKeyword" />
+        </MudTd>
+        <MudTd DataLabel="Rating">
+            <MudHighlighter Text="@context.Rating.ToString("N1")" HighlightedText="@_searchKeyword" />
+        </MudTd>
+        <MudTd DataLabel="Ticket Price">
+            <MudHighlighter Text="@context.TicketPrice.ToString("C0")" HighlightedText="@_searchKeyword" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

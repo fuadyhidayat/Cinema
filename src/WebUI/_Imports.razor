@@ -10,3 +10,8 @@
 @using WebUI.Layouts
 @using WebUI.Common.Components
 @using MudBlazor
+@using MediatR
+
+@inject ISender _sender
+@inject NavigationManager _navigationManager
+@inject ISnackbar _snackbar

@@ -1,0 +1,38 @@
+﻿@page "/Movies/Details/{id:int}"
+
+<LoadingLinear IsVisible="_isLoading" />
+@if (_movie is not null)
+{
+    <PageHeader Title="@_movie.Title" BreadcrumbItems="_breadcrumbItems" />
+    <MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Edit" Href="@($"Movies/Edit/{_movie.Id}")">Edit</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever">Delete</MudButton>
+    </MudStack>
+    <MudPaper Class="pa-4">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudField Label="Synopsis" Class="text-multiline">
+                    @_movie.Synopsis
+                </MudField>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudField Label="Release Date">
+                    @_movie.ReleaseDate.ToString("dd MMMM yyyy")
+                </MudField>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudField Label="Rating">
+                    @_movie.Rating.ToString("N1")
+                </MudField>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudField Label="Ticket Price">
+                    @_movie.TicketPrice.ToString("C0")
+                </MudField>
+            </MudItem>
+        </MudGrid>
+        <MudStack Row="true" Justify="Justify.FlexEnd" Class="mt-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.ChevronLeft" Href="Movies">Back</MudButton>
+        </MudStack>
+    </MudPaper>
+}

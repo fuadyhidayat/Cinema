@@ -1,0 +1,14 @@
+.text-multiline
+{
+    white-space: pre-wrap;
+}
+
+.landing
+{
+    background-image: url("../img/cinema.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: calc(100vh - 90px);
+    color: white;
+}
