@@ -1,4 +1,6 @@
-﻿namespace Logic.Movies.GetMovie;
+﻿using Microsoft.Extensions.Logging;
+
+namespace Logic.Movies.GetMovie;
 
 public class GetMovieLogic(DataAccessService dataAccessService)
     : IRequestHandler<GetMovieInput, GetMovieOutput>
