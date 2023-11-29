@@ -11,7 +11,9 @@
 @using WebUI.Common.Components
 @using MudBlazor
 @using MediatR
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 
 @inject ISender _sender
 @inject NavigationManager _navigationManager
 @inject ISnackbar _snackbar
+@inject ProtectedSessionStorage _storage

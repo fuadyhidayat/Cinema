@@ -25,6 +25,10 @@
             <MudLink Href="@($"Movies/Details/{context.Id}")">
                 <MudHighlighter Text="@context.Title" HighlightedText="@_searchKeyword" />
             </MudLink>
+            <hr />
+            <MudButton Variant="Variant.Outlined" Color="Color.Dark" OnClick="() => SelectMovie(context.Id)">
+                @context.Title
+            </MudButton>
         </MudTd>
         <MudTd DataLabel="Release Date">
             <MudHighlighter Text="@context.ReleaseDate.ToString("dd MMM yyyy")" HighlightedText="@_searchKeyword" />

@@ -1,4 +1,5 @@
 using Logic.Movies.GetMovies;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using MudBlazor;
 
 namespace WebUI.Features.Movies;
@@ -67,5 +68,12 @@ public partial class Index
         }
 
         return false;
+    }
+
+    private async Task SelectMovie(int id)
+    {
+        await _storage.SetAsync("MovieId", id);
+
+        _navigationManager.NavigateTo("/Movies/DetailsBaru");
     }
 }
