@@ -14,7 +14,15 @@
     </MudDrawer>
     <MudMainContent>
         <div class="main-content">
-            @Body
+            <ErrorBoundary @ref="_errorBoundary">
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent>
+                    <ExceptionViewer Exception="@context" />
+                    @Body
+                </ErrorContent>
+            </ErrorBoundary>
         </div>
     </MudMainContent>
 </MudLayout>

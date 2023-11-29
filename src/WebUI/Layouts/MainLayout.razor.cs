@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 
 namespace WebUI.Layouts;
@@ -5,6 +6,7 @@ namespace WebUI.Layouts;
 public partial class MainLayout
 {
     private bool _drawerOpen = true;
+    private ErrorBoundary? _errorBoundary;
 
     private readonly MudTheme _theme = new()
     {
@@ -28,5 +30,10 @@ public partial class MainLayout
     private void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    protected override void OnParametersSet()
+    {
+        _errorBoundary?.Recover();
     }
 }

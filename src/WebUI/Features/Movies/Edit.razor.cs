@@ -58,6 +58,8 @@ public partial class Edit
 
     public async Task Submit()
     {
+        _isLoading = true;
+
         var input = new UpdateMovieInput()
         {
             Id = _model.Id,
@@ -69,6 +71,8 @@ public partial class Edit
         };
 
         await _sender.Send(input);
+
+        _isLoading = false;
 
         _ = _snackbar.Add($"Movie {input.Title} has been successfully updated.", Severity.Success);
 
