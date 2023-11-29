@@ -1,3 +1,4 @@
+using Logic.Common.Exceptions;
 using Logic.Movies.RemoveMovie;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -16,6 +17,7 @@ public partial class DialogRemoveMovie
     protected MudDialogInstance MudDialog { get; init; } = default!;
 
     private bool _isLoading;
+    private Exception? _exception = null;
 
     protected void Cancel()
     {
@@ -24,19 +26,30 @@ public partial class DialogRemoveMovie
 
     private async Task Confirm()
     {
-        _isLoading = true;
-
-        var input = new RemoveMovieInput
+        try
         {
-            Id = MovieId
-        };
+            _isLoading = true;
 
-        await _sender.Send(input);
+            var input = new RemoveMovieInput
+            {
+                Id = MovieId
+            };
 
-        _isLoading = false;
+            await _sender.Send(input);
 
-        _ = _snackbar.Add($"Movie {MovieTitle} has been successfully removed.", Severity.Success);
+            _isLoading = false;
 
-        MudDialog.Close(DialogResult.Ok(true));
+            _ = _snackbar.Add($"Movie {MovieTitle} has been successfully removed.", Severity.Success);
+
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            _exception = ex;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
     }
 }

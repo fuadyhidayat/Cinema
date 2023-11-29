@@ -11,5 +11,8 @@ public class RemoveMovieInputValidator : AbstractValidator<RemoveMovieInput>
     {
         _ = RuleFor(x => x.Id)
             .GreaterThan(0);
+
+        _ = RuleFor(x => x.Id)
+            .NotEqual(7);
     }
 }

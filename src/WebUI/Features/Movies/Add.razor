@@ -2,47 +2,53 @@
 
 <PageHeader Title="Add Movie" BreadcrumbItems="_breadcrumbItems" />
 <LoadingLinear IsVisible="_isLoading" />
+<ExceptionViewer Exception="_exception" />
 <MudPaper Class="pa-4">
-    <MudGrid>
-        <MudItem xs="12" md="6">
-            <MudTextField Label="Title"
-                          Placeholder="Title"
-                          @bind-Value="_model.Title" />
-        </MudItem>
-        <MudItem xs="12" md="6">
-            <MudTextField Label="Synopsis"
-                          Placeholder="Synopsis"
-                          Required="true"
-                          @bind-Value="_model.Synopsis" Lines="4" />
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudDatePicker @bind-Date="_model.ReleaseDate"
-                           Label="Release Date"
-                           For="@(() => _model.ReleaseDate)"
-                           DisableToolbar="true"
-                           Required="true" />
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudNumericField Format="N1"
-                             Required="true"
-                             Label="Rating"
-                             Min="1" Max="10"
-                             Step="0.1f"
-                             For="() => _model.Rating"
-                             @bind-Value="_model.Rating" />
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudNumericField HideSpinButtons="true"
-                             AdornmentText="Rp"
-                             Adornment="Adornment.Start"
-                             Format="N0"
-                             Required="true"
-                             Label="Ticket Price"
-                             Min="10000" Max="100000"
-                             For="() => _model.TicketPrice"
-                             @bind-Value="_model.TicketPrice" />
-        </MudItem>
-    </MudGrid>
+    <MudForm Model="_model" @ref="_form" Validation="@(_validator.ValidateValue)">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudTextField Label="Title"
+                              Placeholder="Title"
+                              Required="true"
+                              RequiredError="Title kudu diisi"
+                              @bind-Value="_model.Title" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Synopsis"
+                              Placeholder="Synopsis"
+                              Required="true"
+                              RequiredError="Synopsis kudu diisi"
+                              @bind-Value="_model.Synopsis" Lines="4" />
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudDatePicker @bind-Date="_model.ReleaseDate"
+                               Label="Release Date"
+                               For="@(() => _model.ReleaseDate)"
+                               DisableToolbar="true"
+                               Required="true" />
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudNumericField Format="N1"
+                                 Required="true"
+                                 Label="Rating"
+                                 Min="1" Max="10"
+                                 Step="0.1f"
+                                 For="() => _model.Rating"
+                                 @bind-Value="_model.Rating" />
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudNumericField HideSpinButtons="true"
+                                 AdornmentText="Rp"
+                                 Adornment="Adornment.Start"
+                                 Format="N0"
+                                 Required="true"
+                                 Label="Ticket Price"
+                                 Min="10000" Max="100000"
+                                 For="() => _model.TicketPrice"
+                                 @bind-Value="_model.TicketPrice" />
+            </MudItem>
+        </MudGrid>
+    </MudForm>
     <MudStack Row="true" Justify="Justify.FlexEnd" Class="mt-4">
         <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.ChevronLeft" Href="Movies">Back</MudButton>
         <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Save" OnClick="Submit">Submit</MudButton>

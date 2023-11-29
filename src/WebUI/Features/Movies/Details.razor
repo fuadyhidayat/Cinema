@@ -1,6 +1,7 @@
 ﻿@page "/Movies/Details/{id:int}"
 
 <LoadingLinear IsVisible="_isLoading" />
+<ExceptionViewer Exception="_exception" />
 @if (_movie is not null)
 {
     <PageHeader Title="@_movie.Title" BreadcrumbItems="_breadcrumbItems" />

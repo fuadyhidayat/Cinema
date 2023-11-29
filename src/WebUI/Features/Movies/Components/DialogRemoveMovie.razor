@@ -2,6 +2,7 @@
 
 <MudDialog>
     <DialogContent>
+        <ExceptionViewer Exception="_exception" />
         @if (_isLoading)
         {
             <MudProgressLinear Color="Color.Primary" Striped="true" Size="Size.Large" Indeterminate="true" Class="my-4" />

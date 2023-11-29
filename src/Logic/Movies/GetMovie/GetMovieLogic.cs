@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace Logic.Movies.GetMovie;
+﻿namespace Logic.Movies.GetMovie;
 
 public class GetMovieLogic(DataAccessService dataAccessService)
     : IRequestHandler<GetMovieInput, GetMovieOutput>
@@ -9,7 +7,12 @@ public class GetMovieLogic(DataAccessService dataAccessService)
     {
         var movie = await dataAccessService.Movies
             .Where(x => x.Id == input.Id)
-            .SingleAsync(cancellationToken);
+            .SingleOrDefaultAsync(cancellationToken);
+
+        if (movie == null)
+        {
+            throw new Exception($"Movie dengan ID {input.Id} tidak ditemukan.");
+        }
 
         return movie.Adapt<GetMovieOutput>();
     }

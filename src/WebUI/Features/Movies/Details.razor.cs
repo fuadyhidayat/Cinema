@@ -13,6 +13,7 @@ public partial class Details
     private List<BreadcrumbItem> _breadcrumbItems = [];
     private GetMovieOutput _movie = default!;
     private bool _isLoading;
+    private Exception? _exception = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -22,20 +23,34 @@ public partial class Details
 
     private async Task LoadMovie()
     {
-        _isLoading = true;
-
-        var input = new GetMovieInput
+        try
         {
-            Id = Id
-        };
+            _isLoading = true;
 
-        _movie = await _sender.Send(input);
+            var input = new GetMovieInput
+            {
+                Id = Id
+            };
 
-        _isLoading = false;
+            _movie = await _sender.Send(input);
+        }
+        catch (Exception ex)
+        {
+            _exception = ex;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
     }
 
     private void LoadBreadcrumbs()
     {
+        if (_movie is null)
+        {
+            return;
+        }
+
         _breadcrumbItems =
         [
             new("Home", ""),
