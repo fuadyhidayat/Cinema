@@ -16,6 +16,7 @@
     </ToolBarContent>
     <HeaderContent>
         <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+        <MudTh>View</MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.ReleaseDate)">Release Date</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.Rating)">Rating</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<MovieDto, object>(x => x.TicketPrice)">Ticket Price</MudTableSortLabel></MudTh>
@@ -25,10 +26,9 @@
             <MudLink Href="@($"Movies/Details/{context.Id}")">
                 <MudHighlighter Text="@context.Title" HighlightedText="@_searchKeyword" />
             </MudLink>
-            <hr />
-            <MudButton Variant="Variant.Outlined" Color="Color.Dark" OnClick="() => SelectMovie(context.Id)">
-                @context.Title
-            </MudButton>
+        </MudTd>
+        <MudTd>
+            <MudIconButton Icon="@Icons.Material.Filled.RemoveRedEye" OnClick="() => SelectMovie(context.Id)" />
         </MudTd>
         <MudTd DataLabel="Release Date">
             <MudHighlighter Text="@context.ReleaseDate.ToString("dd MMM yyyy")" HighlightedText="@_searchKeyword" />
