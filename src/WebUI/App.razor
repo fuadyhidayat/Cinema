@@ -1,9 +1,19 @@
 ﻿@using WebUI.Features
+@using WebUI.Services.SimpleAuthentication.Components
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
-            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <RedirectToLogin />
+                </NotAuthorized>
+                <Authorizing>
+                    <MudAlert Severity="Severity.Info">
+                        Authorizing. Please wait...
+                    </MudAlert>
+                </Authorizing>
+            </AuthorizeRouteView>
         </Found>
         <NotFound>
             <PageTitle>Gak Ketemu</PageTitle>

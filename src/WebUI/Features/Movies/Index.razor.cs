@@ -1,6 +1,4 @@
 using Logic.Movies.GetMovies;
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
-using MudBlazor;
 
 namespace WebUI.Features.Movies;
 
