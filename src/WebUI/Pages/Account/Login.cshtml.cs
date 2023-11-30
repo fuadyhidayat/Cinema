@@ -51,6 +51,7 @@ public class LoginModel(
         {
             new("Username", Input.Username),
             new("Name", userProfile.Name),
+            new("Email", userProfile.Email),
             new("LoginTime", DateTimeOffset.Now.ToString())
         };
 

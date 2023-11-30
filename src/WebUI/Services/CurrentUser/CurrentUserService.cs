@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
-using System.Security;
-using Logic.Services.CurrentUser;
 using Logic.Common.Extensions;
+using Logic.Services.CurrentUser;
 
 namespace WebUI.Services.CurrentUser;
 
@@ -9,6 +8,7 @@ public class CurrentUserService : ICurrentUserService
 {
     public string Username { get; private set; }
     public string Name { get; private set; }
+    public string Email { get; private set; }
 
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
     {
@@ -21,5 +21,6 @@ public class CurrentUserService : ICurrentUserService
 
         Username = user.GetUsername();
         Name = user.GetName();
+        Email = user.GetEmail();
     }
 }

@@ -3,15 +3,18 @@
   [
     {
       "username": "user.satu",
-      "name": "User Satu"
+      "name": "User Satu",
+      "email": "user.satu@cinema.com"
     },
     {
       "username": "user.dua",
-      "name": "User Dua"
+      "name": "User Dua",
+      "email": "user.dua@cinema.com"
     },
     {
       "username": "user.tiga",
-      "name": "User Tiga"
+      "name": "User Tiga",
+      "email": "user.tiga@cinema.com"
     }
   ]
 }

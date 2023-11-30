@@ -6,14 +6,14 @@ public static class ClaimsPrincipalExtensions
 {
     public static string GetUsername(this ClaimsPrincipal principal)
     {
-        var claimName = principal.FindFirst(x => x.Type == "Username");
+        var claimUsername = principal.FindFirst(x => x.Type == "Username");
 
-        if (claimName is null)
+        if (claimUsername is null)
         {
             return "anonymous";
         }
 
-        return claimName.Value;
+        return claimUsername.Value;
     }
 
     public static string GetName(this ClaimsPrincipal principal)
@@ -26,6 +26,18 @@ public static class ClaimsPrincipalExtensions
         }
 
         return claimName.Value;
+    }
+
+    public static string GetEmail(this ClaimsPrincipal principal)
+    {
+        var claimEmail = principal.FindFirst(x => x.Type == "Email");
+
+        if (claimEmail is null)
+        {
+            return "no-email@cinema.com";
+        }
+
+        return claimEmail.Value;
     }
 
     public static DateTimeOffset GetLoginTime(this ClaimsPrincipal user)

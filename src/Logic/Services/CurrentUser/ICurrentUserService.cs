@@ -4,4 +4,5 @@ public interface ICurrentUserService
 {
     string Username { get; }
     string Name { get; }
+    string Email { get; }
 }
