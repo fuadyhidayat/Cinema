@@ -1,0 +1,23 @@
+﻿<AuthorizeView>
+    <NotAuthorized>
+        <MudButton Size="Size.Small"
+                   StartIcon="@Icons.Material.Filled.Login"
+                   Color="Color.Inherit"
+                   Href="Account/Login">
+            Login
+        </MudButton>
+    </NotAuthorized>
+    <Authorized>
+        <MudMenu Dense="true" Color="Color.Inherit" StartIcon="@Icons.Material.Filled.Person"
+                 EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
+                 AnchorOrigin="Origin.CenterRight" TransformOrigin="Origin.TopRight"
+                 Label="@context.User.GetName()">
+            <MudMenuItem Href="MySession">
+                My Session
+            </MudMenuItem>
+            <MudMenuItem OnClick="NavigateToLogout">
+                Logout
+            </MudMenuItem>
+        </MudMenu>
+    </Authorized>
+</AuthorizeView>

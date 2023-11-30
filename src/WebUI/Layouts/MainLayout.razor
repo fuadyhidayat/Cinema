@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
+@using WebUI.Services.SimpleAuthentication.Components
+
 <MudThemeProvider Theme="_theme" />
 <MudDialogProvider FullWidth="true" MaxWidth="MaxWidth.Small" />
 <MudSnackbarProvider />
@@ -8,6 +10,7 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleDrawer())" />
         <MudText Typo="Typo.h5" Class="ml-3">Cinema</MudText>
         <MudSpacer />
+        <AccountInfo />
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <MyNavMenu />

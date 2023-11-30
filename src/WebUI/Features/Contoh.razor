@@ -1,0 +1,13 @@
+﻿@page "/Contoh"
+
+<PageHeader Title="Contoh" />
+
+<AuthorizeView>
+    <NotAuthorized>
+        Anda belum login.
+    </NotAuthorized>
+    <Authorized>
+        Anda sudah login @context.User.GetUsername() dengan nama  @context.User.GetName()
+        pada @context.User.GetLoginTime()
+    </Authorized>
+</AuthorizeView>

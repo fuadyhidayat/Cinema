@@ -1,0 +1,49 @@
+﻿@page "/MySession"
+
+@attribute [Authorize]
+
+<PageHeader Title="My Session" BreadcrumbItems="_breadcrumbItems" />
+<AuthorizeView Context="authorizeContext">
+    <Authorized>
+        <MudTabs Color="Color.Dark" PanelClass="pa-6">
+            <MudTabPanel Text="General Info">
+                <MudGrid>
+                    <MudItem xs="12" sm="6">
+                        <MudField Label="Username">
+                            @authorizeContext.User.GetUsername()
+                        </MudField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudField Label="Name">
+                            @authorizeContext.User.GetName()
+                        </MudField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudField Label="Login Time">
+                            @authorizeContext.User.GetLoginTime().ToString()
+                        </MudField>
+                    </MudItem>
+                </MudGrid>
+            </MudTabPanel>
+            <MudTabPanel Text="My Claims">
+                <MudSimpleTable Outlined="true" Bordered="true" Striped="true" Hover="true">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var claim in authorizeContext.User.Claims.OrderBy(x => x.Type))
+                        {
+                            <tr>
+                                <td>@claim.Type</td>
+                                <td>@claim.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudTabPanel>
+        </MudTabs>
+    </Authorized>
+</AuthorizeView>

@@ -1,0 +1,17 @@
+﻿{
+  "users":
+  [
+    {
+      "username": "user.satu",
+      "name": "User Satu"
+    },
+    {
+      "username": "user.dua",
+      "name": "User Dua"
+    },
+    {
+      "username": "user.tiga",
+      "name": "User Tiga"
+    }
+  ]
+}
