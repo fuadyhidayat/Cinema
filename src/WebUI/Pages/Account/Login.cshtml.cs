@@ -61,6 +61,13 @@ public class LoginModel(
             claims.Add(new Claim(ClaimTypes.Role, role));
         }
 
+        var permissions = simpleAuthorizationService.GetPermissions(Input.Username);
+
+        foreach (var permission in permissions)
+        {
+            claims.Add(new Claim("Permission", permission));
+        }
+
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 

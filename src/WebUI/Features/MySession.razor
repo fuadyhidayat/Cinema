@@ -25,6 +25,48 @@
                     </MudItem>
                 </MudGrid>
             </MudTabPanel>
+            <MudTabPanel Text="Roles">
+                @if (authorizeContext.User.GetRoles().Any())
+                {
+                    <MudSimpleTable Elevation="0" Outlined="true" Bordered="true" Striped="true" Hover="true">
+                        <tbody>
+                            @foreach (var role in authorizeContext.User.GetRoles().OrderBy(x => x))
+                            {
+                                <tr>
+                                    <td>@role</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                }
+                else
+                {
+                    <MudAlert Variant="Variant.Filled" Severity="Severity.Info">
+                        You have no roles
+                    </MudAlert>
+                }
+            </MudTabPanel>
+            <MudTabPanel Text="Permissions">
+                @if (authorizeContext.User.GetPermissions().Any())
+                {
+                    <MudSimpleTable Elevation="0" Outlined="true" Bordered="true" Striped="true" Hover="true">
+                        <tbody>
+                            @foreach (var permission in authorizeContext.User.GetPermissions().OrderBy(x => x))
+                            {
+                                <tr>
+                                    <td>@permission</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                }
+                else
+                {
+                    <MudAlert Variant="Variant.Filled" Severity="Severity.Info">
+                        You have no permissions
+                    </MudAlert>
+                }
+            </MudTabPanel>
             <MudTabPanel Text="My Claims">
                 <MudSimpleTable Outlined="true" Bordered="true" Striped="true" Hover="true">
                     <thead>

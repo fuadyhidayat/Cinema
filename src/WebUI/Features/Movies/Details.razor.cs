@@ -1,5 +1,8 @@
+using Logic.Common.Extensions;
+using Logic.Movies.Constants;
 using Logic.Movies.GetMovie;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
 using WebUI.Features.Movies.Components;
 
@@ -7,6 +10,9 @@ namespace WebUI.Features.Movies;
 
 public partial class Details
 {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
     [Parameter]
     public int Id { get; set; }
 
@@ -15,8 +21,23 @@ public partial class Details
     private bool _isLoading;
     private Exception? _exception = null;
 
+    private bool _bolehUbahMovie = false;
+    private bool _bolehHapusMovie = false;
+
     protected override async Task OnInitializedAsync()
     {
+        if (authenticationState is not null)
+        {
+            var authState = await authenticationState;
+            var user = authState?.User;
+
+            if (user is not null)
+            {
+                _bolehUbahMovie = user.HasPermission(PermissionFor.EditMovie);
+                _bolehHapusMovie = user.HasPermission(PermissionFor.RemoveMovie);
+            }
+        }
+
         await LoadMovie();
         LoadBreadcrumbs();
     }

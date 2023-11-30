@@ -1,5 +1,7 @@
 ﻿@page "/Movies/Edit/{id:int}"
 
+@attribute [Authorize(Policy = PermissionFor.Edit)]
+
 <LoadingLinear IsVisible="_isLoading" />
 @if (_model is not null)
 {

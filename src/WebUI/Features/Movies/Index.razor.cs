@@ -1,6 +1,8 @@
 using Logic.Movies.GetMovies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
+using Logic.Common.Extensions;
+using Logic.Movies.Constants;
 
 namespace WebUI.Features.Movies;
 
@@ -24,7 +26,7 @@ public partial class Index
 
             if (user is not null)
             {
-                _bolehAddMovie = user.IsInRole("Role XYZ");
+                _bolehAddMovie = user.HasPermission(PermissionFor.AddMovie);
             }
         }
 

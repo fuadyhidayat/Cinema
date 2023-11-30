@@ -7,6 +7,11 @@
       [
         "user.satu",
         "user.dua"
+      ],
+      "permissions":
+      [
+        "movie.add",
+        "movie.edit"
       ]
     },
     {
@@ -15,6 +20,11 @@
       [
         "user.dua",
         "user.tiga"
+      ],
+      "permissions":
+      [
+        "movie.add",
+        "movie.remove"
       ]
     }
   ]

@@ -39,4 +39,19 @@ public static class ClaimsPrincipalExtensions
 
         return DateTimeOffset.Parse(claimLoginTime.Value);
     }
+
+    public static IEnumerable<string> GetRoles(this ClaimsPrincipal user)
+    {
+        return user.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value);
+    }
+
+    public static IEnumerable<string> GetPermissions(this ClaimsPrincipal user)
+    {
+        return user.Claims.Where(x => x.Type == "Permission").Select(x => x.Value);
+    }
+
+    public static bool HasPermission(this ClaimsPrincipal user, string permission)
+    {
+        return user.Claims.Any(x => x.Type == "Permission" && x.Value == permission);
+    }
 }
