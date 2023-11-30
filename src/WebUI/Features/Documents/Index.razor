@@ -1,0 +1,37 @@
+﻿@page "/Documents"
+
+@using Logic.Documents.GetDocuments
+
+<PageHeader Title="Documents" BreadcrumbItems="_breadcrumbItems" />
+<MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Href="Documents/Add">Add Document</MudButton>
+</MudStack>
+<MudTable Elevation="0" Hover="true" Outlined="true" Bordered="true" Striped="true"
+          Loading="_isLoading"
+          Items="_documents" Filter="new Func<DocumentDto,bool>(FilterDocuments)">
+    <ToolBarContent>
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchKeyword" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<DocumentDto, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<DocumentDto, object>(x => x.FileName)">File Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<DocumentDto, object>(x => x.FileSize)">File Size</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>
+            <MudLink Href="@($"Documents/Details/{context.Id}")">
+                <MudHighlighter Text="@context.Title" HighlightedText="@_searchKeyword" />
+            </MudLink>
+        </MudTd>
+        <MudTd DataLabel="File Name">
+            <MudHighlighter Text="@context.FileName" HighlightedText="@_searchKeyword" />
+        </MudTd>
+        <MudTd DataLabel="Rating">
+            <MudHighlighter Text="@context.FileSize.ToReadableFileSize()" HighlightedText="@_searchKeyword" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

@@ -1,0 +1,36 @@
+﻿@page "/Documents/Details/{id:int}"
+
+@attribute [Authorize]
+
+@inject IJSRuntime _jsRuntime
+
+<LoadingLinear IsVisible="_isLoading" />
+@if (_document is not null)
+{
+    <PageHeader Title="@_document.Title" BreadcrumbItems="_breadcrumbItems" />
+    <MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.CloudDownload" OnClick="Download">Download</MudButton>
+        <AuthorizeView Policy="@PermissionFor.RemoveDocument">
+            <Authorized>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.DeleteForever" OnClick="ShowDialogRemoveDocument">Delete</MudButton>
+            </Authorized>
+        </AuthorizeView>
+    </MudStack>
+    <MudPaper Class="pa-4">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudField Label="File Name">
+                    @_document.FileName
+                </MudField>
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudField Label="File Size">
+                    @_document.FileSize.ToReadableFileSize()
+                </MudField>
+            </MudItem>
+        </MudGrid>
+        <MudStack Row="true" Justify="Justify.FlexEnd" Class="mt-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.ChevronLeft" Href="Documents">Back</MudButton>
+        </MudStack>
+    </MudPaper>
+}

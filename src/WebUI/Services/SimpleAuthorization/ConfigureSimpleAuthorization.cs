@@ -1,4 +1,5 @@
-﻿using Logic.Movies.Constants;
+﻿using MoviesPermissionFor = Logic.Movies.Constants.PermissionFor;
+using DocumentsPermissionFor = Logic.Documents.Constants.PermissionFor;
 
 namespace WebUI.Services.SimpleAuthorization;
 
@@ -8,9 +9,12 @@ public static class ConfigureSimpleAuthorization
     {
         _ = services.AddAuthorization(configure =>
         {
-            configure.AddPolicy(PermissionFor.AddMovie, policy => policy.RequireClaim("Permission", PermissionFor.AddMovie));
-            configure.AddPolicy(PermissionFor.EditMovie, policy => policy.RequireClaim("Permission", PermissionFor.EditMovie));
-            configure.AddPolicy(PermissionFor.RemoveMovie, policy => policy.RequireClaim("Permission", PermissionFor.RemoveMovie));
+            configure.AddPolicy(MoviesPermissionFor.AddMovie, policy => policy.RequireClaim("Permission", MoviesPermissionFor.AddMovie));
+            configure.AddPolicy(MoviesPermissionFor.EditMovie, policy => policy.RequireClaim("Permission", MoviesPermissionFor.EditMovie));
+            configure.AddPolicy(MoviesPermissionFor.RemoveMovie, policy => policy.RequireClaim("Permission", MoviesPermissionFor.RemoveMovie));
+
+            configure.AddPolicy(DocumentsPermissionFor.AddDocument, policy => policy.RequireClaim("Permission", DocumentsPermissionFor.AddDocument));
+            configure.AddPolicy(DocumentsPermissionFor.RemoveDocument, policy => policy.RequireClaim("Permission", DocumentsPermissionFor.RemoveDocument));
         });
 
         _ = services.AddScoped<SimpleAuthorizationService>();

@@ -1,0 +1,37 @@
+﻿@page "/Documents/Add"
+
+@attribute [Authorize(Policy = PermissionFor.AddDocument)]
+
+<PageHeader Title="Add Document" BreadcrumbItems="_breadcrumbItems" />
+<LoadingLinear IsVisible="_isLoading" />
+<MudPaper Class="pa-4">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudTextField Label="Title"
+                          Placeholder="Title"
+                          @bind-Value="_model.Title" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudStack Row="true" AlignItems="AlignItems.Baseline">
+                <MudPaper Elevation="0" Class="flex-grow-1">
+                    @if (_model.File is null)
+                    {
+                        <MudField Label="File" HelperText="Required">Please select a File.</MudField>
+                    }
+                    else
+                    {
+                        <MudField Label="File" HelperText="Required">@_model.File.Name (@_model.File.Size.ToReadableFileSize())</MudField>
+                    }
+                </MudPaper>
+                <MudPaper Elevation="0" Class="ml-4">
+                    <InputFile id="inputFile" OnChange="OnFileSelected" hidden accept=".docx, .doc" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.CloudUpload" Size="Size.Small" HtmlTag="label" for="inputFile">Select</MudButton>
+                </MudPaper>
+            </MudStack>
+        </MudItem>
+    </MudGrid>
+    <MudStack Row="true" Justify="Justify.FlexEnd" Class="mt-4">
+        <MudButton Variant="Variant.Filled" Color="Color.Dark" StartIcon="@Icons.Material.Filled.ChevronLeft" Href="Documents">Back</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Save" OnClick="Submit">Submit</MudButton>
+    </MudStack>
+</MudPaper>

@@ -4,6 +4,7 @@ using Logic.Services.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Logic.Services.DataAccess.Migrations
 {
     [DbContext(typeof(DataAccessService))]
-    partial class DataAccessServiceModelSnapshot : ModelSnapshot
+    [Migration("20231130085351_002_MembuatTableDocuments")]
+    partial class _002_MembuatTableDocuments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

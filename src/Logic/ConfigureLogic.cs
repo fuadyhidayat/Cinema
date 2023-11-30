@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Logic.Common.Behaviours;
+using Logic.Services.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,7 @@ public static class ConfigureLogic
         });
 
         services.AddDataAccess(configuration);
+        services.AddStorage();
 
         return services;
     }

@@ -11,7 +11,9 @@
       "permissions":
       [
         "movie.add",
-        "movie.edit"
+        "movie.edit",
+        "document.add",
+        "document.remove"
       ]
     },
     {
