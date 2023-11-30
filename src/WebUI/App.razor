@@ -1,12 +1,24 @@
 ﻿@using WebUI.Features
 @using WebUI.Services.SimpleAuthentication.Components
+@using WebUI.Services.SimpleAuthorization.Components
 
 <CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <RedirectToLogin />
+                     @{
+                        var identity = context.User.Identity;
+
+                        if (identity is null || !identity.IsAuthenticated)
+                        {
+                            <RedirectToLogin />
+                        }
+                        else
+                        {
+                            <Forbidden />
+                        }
+                    }
                 </NotAuthorized>
                 <Authorizing>
                     <MudAlert Severity="Severity.Info">

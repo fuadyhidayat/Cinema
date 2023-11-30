@@ -1,0 +1,21 @@
+﻿{
+  "roles":
+  [
+    {
+      "name": "Role ABC",
+      "users":
+      [
+        "user.satu",
+        "user.dua"
+      ]
+    },
+    {
+      "name": "Role XYZ",
+      "users":
+      [
+        "user.dua",
+        "user.tiga"
+      ]
+    }
+  ]
+}

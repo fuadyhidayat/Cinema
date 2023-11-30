@@ -1,16 +1,33 @@
 using Logic.Movies.GetMovies;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components;
 
 namespace WebUI.Features.Movies;
 
 public partial class Index
 {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
     private List<BreadcrumbItem> _breadcrumbItems = [];
     private bool _isLoading;
     private List<MovieDto> _movies = [];
     private string? _searchKeyword;
+    private bool _bolehAddMovie = false;
 
     protected override async Task OnInitializedAsync()
     {
+        if (authenticationState is not null)
+        {
+            var authState = await authenticationState;
+            var user = authState?.User;
+
+            if (user is not null)
+            {
+                _bolehAddMovie = user.IsInRole("Role XYZ");
+            }
+        }
+
         LoadBreadcrumbs();
         await LoadMovies();
     }

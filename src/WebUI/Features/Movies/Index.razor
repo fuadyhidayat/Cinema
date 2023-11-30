@@ -5,8 +5,9 @@
 <PageHeader Title="Movies" BreadcrumbItems="_breadcrumbItems" />
 
 <MudStack Row="true" Justify="Justify.FlexEnd" Class="mb-4">
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" Href="Movies/Add">Add Movie</MudButton>
+    <MudButton Disabled="!_bolehAddMovie" Variant="Variant.Filled" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" Href="Movies/Add">Add Movie</MudButton>
 </MudStack>
+
 <MudTable Elevation="0" Hover="true" Outlined="true" Bordered="true" Striped="true"
           Loading="_isLoading"
           Items="_movies" Filter="new Func<MovieDto,bool>(FilterMovies)">

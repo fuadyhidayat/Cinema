@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using WebUI.Services.SimpleAuthentication;
 using WebUI.Services.SimpleUserProfile;
+using WebUI.Services.SimpleAuthorization;
 
 namespace WebUI.Pages.Account;
 
 public class LoginModel(
     SimpleAuthenticationService simpleAuthenticationService,
-    SimpleUserProfileService simpleUserProfileService)
+    SimpleUserProfileService simpleUserProfileService,
+    SimpleAuthorizationService simpleAuthorizationService)
     : PageModel
 {
     [BindProperty]
@@ -51,6 +53,13 @@ public class LoginModel(
             new("Name", userProfile.Name),
             new("LoginTime", DateTimeOffset.Now.ToString())
         };
+
+        var roles = simpleAuthorizationService.GetRoles(Input.Username);
+
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

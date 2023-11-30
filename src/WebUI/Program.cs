@@ -2,6 +2,7 @@ using Logic;
 using Logic.Services.Logging;
 using MudBlazor.Services;
 using WebUI.Services.SimpleAuthentication;
+using WebUI.Services.SimpleAuthorization;
 using WebUI.Services.SimpleUserProfile;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddLogic(builder.Configuration);
 builder.Services.AddMudServices();
 builder.Services.AddSimpleAuthentication();
 builder.Services.AddSimpleUserProfile();
+builder.Services.AddSimpleAuthorization();
 
 var app = builder.Build();
 

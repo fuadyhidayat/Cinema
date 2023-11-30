@@ -1,5 +1,7 @@
 ﻿@page "/Movies/Add"
 
+@attribute [Authorize(Roles = "Role XYZ")]
+
 <PageHeader Title="Add Movie" BreadcrumbItems="_breadcrumbItems" />
 <LoadingLinear IsVisible="_isLoading" />
 <ExceptionViewer Exception="_exception" />
